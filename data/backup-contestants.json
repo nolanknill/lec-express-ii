@@ -1,0 +1,47 @@
+[
+    {
+        "id": 1,
+        "name": "Jaida Essence Hall",
+        "hometown": "Milwaukee, Wisconsin",
+        "country": "USA",
+        "age": 34,
+        "originalSeason": "Season 12",
+        "rating": 7
+    },
+    {
+        "id": 2,
+        "name": "Shea Couleé",
+        "hometown": "Chicago, Illinois",
+        "country": "USA",
+        "age": 32,
+        "originalSeason": "Season 9",
+        "rating": 10
+    },
+    {
+        "id": 3,
+        "name": "The Vivienne",
+        "hometown": "Liverpool",
+        "country": "UK",
+        "age": 29,
+        "originalSeason": "UK Series 1",
+        "rating": 1
+    },
+    {
+        "id": 4,
+        "name": "Monét X Change",
+        "hometown": "New York City, New York",
+        "country": "USA",
+        "age": 31,
+        "originalSeason": "Season 10",
+        "rating": 10
+    },
+    {
+        "id": 5,
+        "name": "Yvie Oddly",
+        "hometown": "Denver, Colorado",
+        "country": "USA",
+        "age": 28,
+        "originalSeason": "Season 11",
+        "rating": 10
+    }
+]
