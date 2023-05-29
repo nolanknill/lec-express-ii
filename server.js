@@ -1,9 +1,14 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const contestantsRoutes = require("./routes/contestants");
-const port = 8080;
+require("dotenv").config();
+
+const port = process.env.PORT || 8080;
 
 app.use(express.static("public"));
+
+app.use(cors( { origin: process.env.CORS_ORIGIN }));
 
 app.use((req, res, next) => {
     // This API is super protected
@@ -14,7 +19,7 @@ app.use((req, res, next) => {
     // if it is an active API KEY
         // req.userId = userId;
 
-    if (req.query.api_key === "grogu") {
+    if (req.query.api_key === process.env.API_KEY) {
         next();
     } else if (!req.query.api_key) {
         res.status(401).json({
