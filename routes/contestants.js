@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const fs = require('fs');
+const crypto = require("crypto");
 
 const filepath = "./data/contestants.json";
 
@@ -15,12 +16,59 @@ function setContestants(contestants) {
     fs.writeFileSync(filepath, JSON.stringify(contestants));
 }
 
-//   GET /contestants
-router.get('/', (_req, res) => {
-    const contestants = getContestants();
+//  GET /contestants
+// POST /contestants
+router
+    .route("/")    
+    .get((_req, res) => {
+        const contestants = getContestants();
 
-    res.json(contestants);
-});
+        res.json(contestants);
+    })
+    .post((req, res) => {
+        // Validate all fields are present
+        if ( ! req.body.name ||
+            ! req.body.hometown ||
+            ! req.body.country ||
+            ! req.body.age ||
+            ! req.body.originalSeason ||
+            ( !req.body.rating && req.body.rating !== 0)
+       ) {
+           return res.status(400).json({
+               error: `Missing required fields`
+           })
+       }
+
+       /*
+            add new contestant:
+                req.body: { name, hometown, country, age, originalSeason, rating }
+                    id ? const crypto = require("crypto"); crypto.randomUUID();
+                    image_src: "http://localhost:8080/images/placeholder.jpeg"
+                
+            add new contestant to the end of the contestants array
+
+            getContestants (read from the file)
+            setContestants (write the new array back to the file)
+
+        */
+
+        const newContestant = {
+            id: crypto.randomUUID(),
+            image_src: "http://localhost:8080/images/placeholder.jpeg",
+            name: req.body.name,
+            hometown: req.body.hometown,
+            country: req.body.country,
+            age: req.body.age,
+            originalSeason: req.body.originalSeason,
+            rating: req.body.rating
+        }
+
+        const updatedContestants = getContestants();
+        updatedContestants.push(newContestant);
+        setContestants(updatedContestants);
+
+        res.status(201).json(newContestant);
+    });
 
 router.route("/:id")
     .get((req, res) => {
